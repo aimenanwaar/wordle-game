@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:path_provider/path_provider.dart';
+import 'package:animated_text_kit/animated_text_kit.dart';
 import 'package:wordle_game/scroll_behav.dart';
 import 'event_bus.dart';
 import 'instruction_pannel.dart';
@@ -229,10 +230,35 @@ class MainMenu extends StatefulWidget {
 class _MainMenuState extends State<MainMenu> {
   @override
   Widget build(BuildContext context) {
+    var mode = Theme.of(context).brightness;
     return Scaffold(
       body: Column(
         mainAxisAlignment: MainAxisAlignment.center,
         children: [
+          DefaultTextStyle(
+            style: TextStyle(
+              color:
+                  mode == Brightness.light ? Colors.grey[850]! : Colors.white,
+              fontSize: 40.0,
+              fontWeight: FontWeight.bold,
+              fontStyle: FontStyle.italic,
+            ),
+            child: AnimatedTextKit(
+              animatedTexts: [
+                WavyAnimatedText(
+                  "LET'S PLAY",
+                  speed: const Duration(
+                    milliseconds: 300,
+                  ),
+                ),
+              ],
+              isRepeatingAnimation: true,
+              repeatForever: true,
+            ),
+          ),
+          const SizedBox(
+            height: 25,
+          ),
           Container(
             decoration: BoxDecoration(
               color: Colors.teal.withOpacity(0.2),
