@@ -246,7 +246,7 @@ class _MainMenuState extends State<MainMenu> {
             child: AnimatedTextKit(
               animatedTexts: [
                 WavyAnimatedText(
-                  "LET'S PLAY",
+                  "LET'S PLAY :)",
                   speed: const Duration(
                     milliseconds: 300,
                   ),
