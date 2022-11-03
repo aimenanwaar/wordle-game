@@ -10,6 +10,7 @@ import 'main-options/page2.dart';
 import 'main-options/page3.dart';
 import 'dart:io';
 import 'dart:math';
+import 'theme.dart';
 
 Future<void> loadSettings() async {
   Directory documentsDirectory = await getApplicationDocumentsDirectory();
@@ -43,27 +44,16 @@ class MyApp extends StatefulWidget {
 }
 
 class _MyAppState extends State<MyApp> {
-  var brightness = Brightness.light;
-
-  void _onThemeChange(dynamic args) {
-    setState(
-      () {
-        brightness =
-            brightness == Brightness.light ? Brightness.dark : Brightness.light;
-      },
-    );
-  }
-
   @override
   void initState() {
     super.initState();
     //loadSettings();
-    mainBus.onBus(event: "ToggleTheme", onEvent: _onThemeChange);
+    onBus(setState);
   }
 
   @override
   void dispose() {
-    mainBus.offBus(event: "ToggleTheme", callBack: _onThemeChange);
+    offBus(setState);
     super.dispose();
   }
 
@@ -72,6 +62,7 @@ class _MyAppState extends State<MyApp> {
     return MaterialApp(
       scrollBehavior: MyScrollBehavior(),
       title: 'Wordle',
+      debugShowCheckedModeBanner: false,
       theme: ThemeData(
         primarySwatch: Colors.grey,
         brightness: brightness,
@@ -107,100 +98,7 @@ class _MainPageState extends State<MainPage> {
                 constraints: const BoxConstraints(maxWidth: 960.0),
                 child: Column(
                   children: [
-                    Container(
-                      constraints: const BoxConstraints(minHeight: 100.0),
-                      child: Row(
-                        crossAxisAlignment: CrossAxisAlignment.end,
-                        children: [
-                          Align(
-                            alignment: Alignment.bottomLeft,
-                            child: Padding(
-                              padding: const EdgeInsets.only(
-                                left: 30.0,
-                                bottom: 10.0,
-                              ),
-                              child: Text(
-                                'WORDLE',
-                                style: TextStyle(
-                                  fontSize: 30.0,
-                                  fontWeight: FontWeight.w300,
-                                  color: mode == Brightness.light
-                                      ? Colors.grey[850]!
-                                      : Colors.white,
-                                ),
-                              ),
-                            ),
-                          ),
-                          const Spacer(),
-                          Align(
-                            alignment: Alignment.bottomRight,
-                            child: Padding(
-                              padding: const EdgeInsets.only(
-                                right: 30.0,
-                                bottom: 10.0,
-                              ),
-                              child: Row(
-                                children: [
-                                  AnimatedSwitcher(
-                                    duration: const Duration(milliseconds: 750),
-                                    reverseDuration:
-                                        const Duration(milliseconds: 750),
-                                    switchInCurve: Curves.bounceOut,
-                                    switchOutCurve: Curves.bounceIn,
-                                    transitionBuilder: (child, animation) {
-                                      var rotateAnimation = Tween<double>(
-                                        begin: 0,
-                                        end: 2 * pi,
-                                      ).animate(animation);
-                                      var opacAnimation = Tween<double>(
-                                        begin: 0,
-                                        end: 1,
-                                      ).animate(animation);
-                                      return AnimatedBuilder(
-                                        animation: rotateAnimation,
-                                        builder: (context, child) {
-                                          return Transform(
-                                            transform: Matrix4.rotationZ(
-                                              rotateAnimation.status ==
-                                                      AnimationStatus.reverse
-                                                  ? 2 * pi -
-                                                      rotateAnimation.value
-                                                  : rotateAnimation.value,
-                                            ),
-                                            alignment: Alignment.center,
-                                            child: Opacity(
-                                              opacity: opacAnimation.value,
-                                              child: child,
-                                            ),
-                                          );
-                                        },
-                                        child: child,
-                                      );
-                                    },
-                                    child: IconButton(
-                                      key: ValueKey(mode),
-                                      icon: mode == Brightness.light
-                                          ? const Icon(Icons.dark_mode_outlined)
-                                          : const Icon(Icons.dark_mode),
-                                      onPressed: () => mainBus
-                                          .emit(event: "ToggleTheme", args: []),
-                                    ),
-                                  ),
-                                  IconButton(
-                                    icon:
-                                        const Icon(Icons.help_outline_outlined),
-                                    //color: Colors.black,
-                                    onPressed: () {
-                                      showInstructionDialog(context: context);
-                                    },
-                                  ),
-                                ],
-                              ),
-                            ),
-                          )
-                        ],
-                      ),
-                    ),
+                    theme(context),
                     const Expanded(
                       child: Padding(
                         padding: EdgeInsets.symmetric(horizontal: 20.0),

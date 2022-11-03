@@ -6,6 +6,7 @@ import '../event_bus.dart';
 import '../instruction_pannel.dart';
 import '../selection_group.dart';
 import '../single_selection.dart';
+import '../theme.dart';
 
 class ChallengePage extends StatefulWidget {
   const ChallengePage({Key? key}) : super(key: key);
@@ -73,69 +74,7 @@ class _ChallengePageState extends State<ChallengePage> {
   Widget build(BuildContext context) {
     var mode = Theme.of(context).brightness;
     return Scaffold(
-      appBar: AppBar(
-        backgroundColor: Theme.of(context).brightness == Brightness.dark
-            ? Colors.grey[850]
-            : Colors.grey[100],
-        elevation: 0.0,
-        shadowColor: Colors.transparent,
-        toolbarHeight: 80.0,
-        titleTextStyle: TextStyle(
-          color: Theme.of(context).brightness == Brightness.dark
-              ? Colors.grey[100]
-              : Colors.black,
-          fontWeight: FontWeight.bold,
-          fontSize: 20.0,
-        ),
-        title: const Text('WORDLE'),
-        centerTitle: true,
-        //iconTheme: const IconThemeData(color: Colors.black),
-        actions: [
-          AnimatedSwitcher(
-            duration: const Duration(milliseconds: 750),
-            reverseDuration: const Duration(milliseconds: 750),
-            switchInCurve: Curves.bounceOut,
-            switchOutCurve: Curves.bounceIn,
-            transitionBuilder: (child, animation) {
-              var rotateAnimation =
-                  Tween<double>(begin: 0, end: 2 * pi).animate(animation);
-              var opacAnimation =
-                  Tween<double>(begin: 0, end: 1).animate(animation);
-              return AnimatedBuilder(
-                animation: rotateAnimation,
-                builder: (context, child) {
-                  return Transform(
-                    transform: Matrix4.rotationZ(
-                        rotateAnimation.status == AnimationStatus.reverse
-                            ? 2 * pi - rotateAnimation.value
-                            : rotateAnimation.value),
-                    alignment: Alignment.center,
-                    child: Opacity(
-                      opacity: opacAnimation.value,
-                      child: child,
-                    ),
-                  );
-                },
-                child: child,
-              );
-            },
-            child: IconButton(
-              key: ValueKey(mode),
-              icon: mode == Brightness.light
-                  ? const Icon(Icons.dark_mode_outlined)
-                  : const Icon(Icons.dark_mode),
-              onPressed: () => mainBus.emit(event: "ToggleTheme", args: []),
-            ),
-          ),
-          IconButton(
-            icon: const Icon(Icons.help_outline_outlined),
-            //color: Colors.black,
-            onPressed: () {
-              showInstructionDialog(context: context);
-            },
-          ),
-        ],
-      ),
+      appBar: appbar(context),
       body: SizedBox(
         width: double.infinity,
         child: SingleChildScrollView(
