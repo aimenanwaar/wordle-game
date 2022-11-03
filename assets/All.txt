@@ -7478,6 +7478,7 @@ longing
 longitude
 longitudinal
 look
+looks
 loom
 loon
 loop

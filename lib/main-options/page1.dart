@@ -256,31 +256,6 @@ class _OfflinePageState extends State<OfflinePage> {
                         ),
                       ),
                     ),
-                    // Expanded(
-                    //   child: Container(
-                    //     decoration: BoxDecoration(
-                    //       color: Colors.pink[200]!.withOpacity(0.2),
-                    //       borderRadius: BorderRadius.circular(10.0),
-                    //     ),
-                    //     margin: const EdgeInsets.all(10.0),
-                    //     child: InkWell(
-                    //       onTap: (){},
-                    //       borderRadius: BorderRadius.circular(10.0),
-                    //       child: Container(
-                    //         alignment: Alignment.center,
-                    //         padding: const EdgeInsets.symmetric(horizontal: 30.0, vertical: 30.0),
-                    //         child: Text(
-                    //           'Start Hard',
-                    //           style: TextStyle(
-                    //             fontSize: 22.0,
-                    //             fontWeight: FontWeight.bold,
-                    //             color: Colors.pink[400],
-                    //           ),
-                    //         ),
-                    //       ),
-                    //     ),
-                    //   ),
-                    // ),
                   ],
                 ),
               ),
