@@ -1,9 +1,4 @@
-import 'dart:math';
-
 import 'package:flutter/material.dart';
-
-import '../event_bus.dart';
-import '../instruction_pannel.dart';
 import '../theme.dart';
 
 class LinkPage extends StatefulWidget {
@@ -59,7 +54,7 @@ class _LinkPageState extends State<LinkPage> {
                 color: Colors.pink.withOpacity(0.2),
                 borderRadius: BorderRadius.circular(10.0),
               ),
-              margin: const EdgeInsets.all(10.0),
+              margin: const EdgeInsets.all(8.0),
               child: InkWell(
                 onTap: () {},
                 borderRadius: BorderRadius.circular(10.0),
@@ -73,7 +68,7 @@ class _LinkPageState extends State<LinkPage> {
                       Text(
                         'Play',
                         style: TextStyle(
-                          fontSize: 22.0,
+                          fontSize: 26.0,
                           fontWeight: FontWeight.bold,
                           color: Colors.pink,
                         ),

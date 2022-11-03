@@ -1,9 +1,4 @@
-import 'dart:math';
-
 import 'package:flutter/material.dart';
-
-import '../event_bus.dart';
-import '../instruction_pannel.dart';
 import '../selection_group.dart';
 import '../single_selection.dart';
 import '../theme.dart';
@@ -72,7 +67,6 @@ class _ChallengePageState extends State<ChallengePage> {
 
   @override
   Widget build(BuildContext context) {
-    var mode = Theme.of(context).brightness;
     return Scaffold(
       appBar: appbar(context),
       body: SizedBox(

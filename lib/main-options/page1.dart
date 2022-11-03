@@ -1,9 +1,4 @@
-import 'dart:math';
-
 import 'package:flutter/material.dart';
-
-import '../event_bus.dart';
-import '../instruction_pannel.dart';
 import '../loading_page.dart';
 import '../selection_group.dart';
 import '../single_selection.dart';

@@ -1,32 +1,34 @@
 import 'dart:math';
-
 import 'package:flutter/material.dart';
-
 import 'event_bus.dart';
 import 'instruction_pannel.dart';
 
 var brightness = Brightness.light;
 void onThemeChange(dynamic args, setstate) {
-  setstate(() {
-    brightness =
-        brightness == Brightness.light ? Brightness.dark : Brightness.light;
-  });
+  setstate(
+    () {
+      brightness =
+          brightness == Brightness.light ? Brightness.dark : Brightness.light;
+    },
+  );
 }
 
 onBus(setstate) {
   mainBus.onBus(
-      event: "ToggleTheme",
-      onEvent: (a) {
-        onThemeChange(a, setstate);
-      });
+    event: "ToggleTheme",
+    onEvent: (a) {
+      onThemeChange(a, setstate);
+    },
+  );
 }
 
 offBus(setstate) {
   mainBus.offBus(
-      event: "ToggleTheme",
-      callBack: (a) {
-        onThemeChange(a, setstate);
-      });
+    event: "ToggleTheme",
+    callBack: (a) {
+      onThemeChange(a, setstate);
+    },
+  );
 }
 
 theme(context) {
@@ -41,21 +43,24 @@ theme(context) {
           alignment: Alignment.bottomLeft,
           child: Padding(
             padding: const EdgeInsets.only(left: 30.0, bottom: 10.0),
-            child: Text('WORDLE',
-                style: TextStyle(
-                    fontSize: 30.0,
-                    fontWeight: FontWeight.w300,
-                    color: mode == Brightness.light
-                        ? Colors.grey[850]!
-                        : Colors.white)),
+            child: Text(
+              'WORDLE',
+              style: TextStyle(
+                fontSize: 30.0,
+                fontWeight: FontWeight.w300,
+                color:
+                    mode == Brightness.light ? Colors.grey[850]! : Colors.white,
+              ),
+            ),
           ),
         ),
         const Spacer(),
         Align(
           alignment: Alignment.bottomRight,
           child: Padding(
-              padding: const EdgeInsets.only(right: 30.0, bottom: 10.0),
-              child: Row(children: [
+            padding: const EdgeInsets.only(right: 30.0, bottom: 10.0),
+            child: Row(
+              children: [
                 AnimatedSwitcher(
                   duration: const Duration(milliseconds: 750),
                   reverseDuration: const Duration(milliseconds: 750),
@@ -100,7 +105,9 @@ theme(context) {
                     showInstructionDialog(context: context);
                   },
                 ),
-              ])),
+              ],
+            ),
+          ),
         )
       ],
     ),
@@ -125,12 +132,14 @@ appbar(context) {
       fontSize: 20.0,
     ),
 
-    title: Text('WORDLE',
-        style: TextStyle(
-            fontSize: 30.0,
-            fontWeight: FontWeight.w300,
-            color:
-                mode == Brightness.light ? Colors.grey[850]! : Colors.white)),
+    title: Text(
+      'WORDLE',
+      style: TextStyle(
+        fontSize: 30.0,
+        fontWeight: FontWeight.w300,
+        color: mode == Brightness.light ? Colors.grey[850]! : Colors.white,
+      ),
+    ),
     //iconTheme: const IconThemeData(color: Colors.black),
     actions: [
       AnimatedSwitcher(

@@ -90,7 +90,6 @@ class _MainPageState extends State<MainPage> {
       future: readSettings(),
       builder: (context, snapshot) {
         if (snapshot.connectionState == ConnectionState.done) {
-          var mode = Theme.of(context).brightness;
           return Scaffold(
             body: Align(
               alignment: Alignment.center,
